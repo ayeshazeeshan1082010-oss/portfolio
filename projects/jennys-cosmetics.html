@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jenny's Cosmetics · Full-Stack E-Commerce</title>
+  <!-- Font & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a12;
+      font-family: 'Inter', sans-serif;
+      color: #eef2f8;
+      line-height: 1.5;
+      padding: 2rem 1.5rem;
+    }
+    .container { max-width: 1300px; margin: 0 auto; }
+    .glass {
+      background: rgba(20, 22, 36, 0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(160, 130, 255, 0.15);
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+    }
+    .glow-border { box-shadow: 0 0 0 1px rgba(160, 130, 255, 0.2), 0 0 30px -8px rgba(140, 90, 255, 0.3); }
+    .badge-glow {
+      background: linear-gradient(145deg, rgba(140, 90, 255, 0.15), rgba(0, 200, 255, 0.08));
+      border: 1px solid rgba(160, 130, 255, 0.25);
+      border-radius: 100px;
+      padding: 0.3rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #b9b0ff;
+      display: inline-block;
+      backdrop-filter: blur(2px);
+    }
+    h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.02em; }
+    h1 { font-size: 3.2rem; line-height: 1.1; }
+    h2 { font-size: 2.2rem; margin-bottom: 1.2rem; }
+    h3 { font-size: 1.4rem; font-weight: 600; }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+    .section-title i { color: #b9a6ff; font-size: 1.8rem; }
+    .btn-primary {
+      background: linear-gradient(145deg, #7b5cff, #5f3edc);
+      border: none;
+      border-radius: 60px;
+      padding: 0.9rem 2.4rem;
+      font-weight: 600;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 8px 20px -6px rgba(100, 70, 255, 0.3);
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px -6px #7b5cff;
+      background: linear-gradient(145deg, #8b70ff, #6849e8);
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin: 2rem 0;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.8rem;
+    }
+    .stat-card {
+      background: rgba(12, 14, 26, 0.6);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(160, 130, 255, 0.1);
+      border-radius: 1.5rem;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .stat-card .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; color: #8892b0; }
+    .stat-card .value { font-weight: 600; font-size: 1.1rem; margin-top: 0.2rem; }
+    .page-card {
+      background: rgba(14, 16, 30, 0.6);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(160, 130, 255, 0.08);
+      border-radius: 1.8rem;
+      padding: 1.5rem 1.5rem 1.8rem;
+      transition: all 0.25s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .page-card:hover {
+      border-color: rgba(160, 130, 255, 0.3);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -16px rgba(100, 70, 255, 0.2);
+    }
+    .page-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 1.2rem;
+      background: #12142a;
+      border: 1px solid rgba(160, 130, 255, 0.1);
+      margin-bottom: 1.2rem;
+      transition: 0.2s;
+    }
+    .page-card:hover .page-img { border-color: rgba(160, 130, 255, 0.3); }
+    .page-number { font-size: 0.7rem; font-weight: 600; color: #7b8bb0; letter-spacing: 0.05em; }
+    .page-card h4 { margin: 0.3rem 0 0.5rem; font-size: 1.2rem; }
+    .page-card p { font-size: 0.9rem; color: #b8c4e0; margin-bottom: 0.8rem; flex:1; }
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.6rem;
+      margin-top: 0.5rem;
+    }
+    .feature-tags span {
+      background: rgba(100, 70, 255, 0.08);
+      border: 1px solid rgba(160, 130, 255, 0.1);
+      border-radius: 40px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: #c2cbf0;
+    }
+    .video-card {
+      background: rgba(14, 16, 30, 0.5);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(160, 130, 255, 0.08);
+      border-radius: 1.8rem;
+      padding: 1.5rem;
+      transition: 0.25s;
+    }
+    .video-card:hover { border-color: rgba(160, 130, 255, 0.2); transform: scale(1.01); }
+    .video-wrapper {
+      position: relative;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      background: #0c0e1a;
+      margin-bottom: 1rem;
+    }
+    .video-wrapper video {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+      border-radius: 1.2rem;
+      background: #101224;
+    }
+    .video-wrapper .duration {
+      position: absolute;
+      bottom: 10px;
+      right: 14px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(2px);
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      color: #c8d0f0;
+      border: 1px solid rgba(255,255,255,0.05);
+      pointer-events: none;
+    }
+    .video-card h4 { font-size: 1.1rem; margin-bottom: 0.2rem; }
+    .video-card p { font-size: 0.9rem; color: #b0bcdb; }
+    .double-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin: 2rem 0;
+    }
+    .tech-badge {
+      display: inline-block;
+      background: rgba(20, 22, 40, 0.7);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(160, 130, 255, 0.1);
+      border-radius: 60px;
+      padding: 0.5rem 1.2rem;
+      font-weight: 500;
+      font-size: 0.85rem;
+      margin: 0.2rem 0.3rem;
+    }
+    .tech-badge i { margin-right: 0.4rem; color: #b9a6ff; }
+    .feature-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1.2rem;
+      margin-top: 0.5rem;
+    }
+    .feature-list li { list-style: none; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
+    .feature-list i { color: #7b5cff; font-size: 0.8rem; }
+    .dev-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .dev-item {
+      background: rgba(12, 14, 26, 0.5);
+      backdrop-filter: blur(4px);
+      border-radius: 1.5rem;
+      padding: 1.2rem 0.8rem;
+      text-align: center;
+      border: 1px solid rgba(160, 130, 255, 0.05);
+    }
+    .dev-item i { font-size: 1.8rem; color: #b9a6ff; margin-bottom: 0.4rem; }
+    .cta-card {
+      background: linear-gradient(145deg, rgba(40, 30, 80, 0.3), rgba(10, 20, 40, 0.3));
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(160, 130, 255, 0.15);
+      border-radius: 2.8rem;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+    .hero-flex {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      margin: 1.5rem 0 3rem;
+    }
+    .hero-left { flex: 1.2; }
+    .hero-right { flex: 1; }
+    .hero-img {
+      background: #12142a;
+      border-radius: 2rem;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(160, 130, 255, 0.15);
+      background-image: radial-gradient(circle at 30% 40%, rgba(120, 80, 255, 0.08), transparent 70%);
+      font-size: 0.9rem;
+      color: #6b7a9f;
+      flex-direction: column;
+      gap: 0.5rem;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2rem;
+    }
+    .hero-img i { font-size: 2.8rem; color: #7b5cff; opacity: 0.3; }
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.2rem 0;
+    }
+    .tech-stack span {
+      background: rgba(20, 22, 40, 0.5);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(160, 130, 255, 0.1);
+      border-radius: 60px;
+      padding: 0.3rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    /* ---- Lightbox / Popup ---- */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      padding: 2rem;
+    }
+    .lightbox.show { display: flex; }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 1.2rem;
+      box-shadow: 0 0 60px rgba(120, 80, 255, 0.15);
+      border: 1px solid rgba(160, 130, 255, 0.2);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      font-size: 2.4rem;
+      color: #b9b0ff;
+      cursor: pointer;
+      transition: 0.2s;
+      background: rgba(20,22,36,0.6);
+      backdrop-filter: blur(4px);
+      border-radius: 60px;
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(160,130,255,0.2);
+    }
+    .lightbox-close:hover { color: white; transform: rotate(90deg); background: rgba(100,70,255,0.2); }
+
+    /* ---- Video Popup (like YouTube) ---- */
+    .video-popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.94);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      padding: 2rem;
+    }
+    .video-popup.show { display: flex; }
+    .video-popup .popup-content {
+      position: relative;
+      width: 90%;
+      max-width: 1000px;
+      background: #0a0a12;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 0 80px rgba(120, 80, 255, 0.1);
+      border: 1px solid rgba(160, 130, 255, 0.15);
+    }
+    .video-popup .popup-content video {
+      width: 100%;
+      max-height: 80vh;
+      display: block;
+      background: #000;
+      border-radius: 2rem;
+    }
+    .video-popup .popup-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 2rem;
+      color: #b9b0ff;
+      cursor: pointer;
+      transition: 0.2s;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      border-radius: 60px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(160,130,255,0.15);
+      z-index: 10;
+    }
+    .video-popup .popup-close:hover { color: white; background: rgba(100,70,255,0.3); }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .double-card { grid-template-columns: 1fr; }
+      h1 { font-size: 2.4rem; }
+      .hero-flex { flex-direction: column; }
+    }
+    @media (max-width: 600px) {
+      .feature-list { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .lightbox img { max-width: 98%; }
+      .video-popup .popup-content { width: 98%; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== HERO ===== -->
+  <div class="hero-flex">
+    <div class="hero-left">
+      <span class="badge-glow"><i class="fas fa-code" style="margin-right: 6px;"></i> FULL-STACK E-COMMERCE PROJECT</span>
+      <h1 style="margin-top: 0.6rem;">Jenny's Cosmetics</h1>
+      <p style="font-size: 1.1rem; color: #c8d0ea; max-width: 90%; margin: 0.8rem 0 1.2rem;">
+        A modern e‑commerce website for cosmetics and imitation jewelry, built with a focus on beautiful design, smooth shopping experience, and full‑stack functionality.
+      </p>
+      <div class="tech-stack">
+        <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>PHP</span><span>MySQL</span><span>XAMPP</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-img glow-border" style="border: 1px solid rgba(160,130,255,0.2);" onclick="openLightbox(this.querySelector('img')?.src || '')">
+        <img src="../assets/images/Jenny's-home.png" alt="Jenny's Cosmetics homepage preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; flex-direction: column; align-items: center; gap: 0.3rem;">
+          <i class="fas fa-image"></i>
+          <span style="background: rgba(0,0,0,0.2); padding: 0.3rem 1rem; border-radius: 60px; font-size: 0.7rem;">[ INSERT PROJECT SCREENSHOT ]</span>
+        </div>
+        <span style="font-size:0.65rem; opacity:0.5; position: absolute; bottom: 8px; right: 16px;">Jenny's Cosmetics · preview</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PROJECT OVERVIEW ===== -->
+  <div class="glass" style="padding: 2rem 2.2rem;">
+    <div class="section-title"><i class="fas fa-layer-group"></i><h2>Project Overview</h2></div>
+    <p style="font-size: 1.05rem; max-width: 85%; color: #d0daf5;">
+      Jenny's Cosmetics is a full‑stack e‑commerce website created to provide customers with a smooth and user‑friendly online shopping experience. The website allows users to explore products, view detailed information, manage their selections, and interact with key e‑commerce features.
+    </p>
+    <div class="stat-grid">
+      <div class="stat-card"><span class="label">Project Type</span><div class="value">E‑Commerce</div></div>
+      <div class="stat-card"><span class="label">Role</span><div class="value">Web Developer</div></div>
+      <div class="stat-card"><span class="label">Development</span><div class="value">Full‑Stack</div></div>
+      <div class="stat-card"><span class="label">Database</span><div class="value">MySQL</div></div>
+    </div>
+  </div>
+
+  <!-- ===== WEBSITE PAGES SHOWCASE ===== -->
+  <div style="margin: 3rem 0 2rem;">
+    <div class="section-title"><i class="fas fa-window-maximize"></i><h2>Website Pages Showcase</h2></div>
+    <div class="card-grid">
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/jenny's-hero.png" alt="Homepage" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ INSERT HOMEPAGE ]</div>
+        <div class="page-number">PAGE 01</div><h4>Homepage</h4>
+        <p>A beautiful homepage that introduces the brand and highlights featured products, categories and key shopping sections.</p>
+        <div class="feature-tags"><span>Hero Banner</span><span>Featured Products</span><span>Categories</span><span>Brand Highlights</span></div>
+      </div>
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/jenny's-shop.png" alt="Shop Page" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ INSERT SHOP PAGE ]</div>
+        <div class="page-number">PAGE 02</div><h4>Shop Page</h4>
+        <p>Users can explore the complete product collection through an organized product grid.</p>
+        <div class="feature-tags"><span>Product Grid</span><span>Product Images</span><span>Product Browsing</span><span>Add to Cart</span></div>
+      </div>
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/jenny's-project-detail.png" alt="Product Details" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ INSERT PRODUCT DETAILS ]</div>
+        <div class="page-number">PAGE 03</div><h4>Product Details</h4>
+        <p>Detailed product pages provide users with product images, descriptions, pricing and shopping actions.</p>
+        <div class="feature-tags"><span>Product Images</span><span>Product Info</span><span>Price &amp; Stock</span><span>Add to Cart</span></div>
+      </div>
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/jenny's-cart.png" alt="Shopping Cart" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ INSERT CART ]</div>
+        <div class="page-number">PAGE 04</div><h4>Shopping Cart</h4>
+        <p>Users can review selected products, update quantities and continue toward checkout.</p>
+        <div class="feature-tags"><span>Selected Products</span><span>Quantity Update</span><span>Order Summary</span><span>Checkout</span></div>
+      </div>
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/jenny's-login.png" alt="Login / Register" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ INSERT LOGIN ]</div>
+        <div class="page-number">PAGE 05</div><h4>Login / Register</h4>
+        <p>Secure user authentication for account creation and login.</p>
+        <div class="feature-tags"><span>User Registration</span><span>User Login</span><span>Form Validation</span><span>Secure Access</span></div>
+      </div>
+    </div>
+
+    <!-- ===== DASHBOARD PAGES ===== -->
+    <div style="margin-top: 3rem;">
+      <div class="section-title"><i class="fas fa-tachometer-alt"></i><h2>Admin Dashboard Pages</h2></div>
+      <div class="card-grid">
+        <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+          <img class="page-img" src="../assets/images/Jenny's-dashboard.png" alt="Dashboard Overview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ DASHBOARD OVERVIEW ]</div>
+          <div class="page-number">ADMIN 01</div><h4>Dashboard Overview</h4>
+          <p>Central admin panel with key metrics, recent orders, and quick actions.</p>
+          <div class="feature-tags"><span>Analytics</span><span>Orders</span><span>Products</span><span>Users</span></div>
+        </div>
+        <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+          <img class="page-img" src="../assets/images/Jenny's-product.png" alt="Product Management" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ PRODUCT MANAGEMENT ]</div>
+          <div class="page-number">ADMIN 02</div><h4>Product Management</h4>
+          <p>Add, edit, delete products with image upload and inventory control.</p>
+          <div class="feature-tags"><span>CRUD</span><span>Inventory</span><span>Categories</span><span>Images</span></div>
+        </div>
+        <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+          <img class="page-img" src="../assets/images/Jenny's-order.png" alt="Order Management" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ ORDER MANAGEMENT ]</div>
+          <div class="page-number">ADMIN 03</div><h4>Order Management</h4>
+          <p>View and manage customer orders, update status, and process shipments.</p>
+          <div class="feature-tags"><span>Orders</span><span>Status</span><span>Customers</span><span>Shipping</span></div>
+        </div>
+        <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+          <img class="page-img" src="../assets/images/Jenny's-user.png" alt="User Management" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ USER MANAGEMENT ]</div>
+          <div class="page-number">ADMIN 04</div><h4>User Management</h4>
+          <p>Manage customer accounts, roles, and permissions.</p>
+          <div class="feature-tags"><span>Customers</span><span>Roles</span><span>Permissions</span><span>Activity</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PROJECT WALKTHROUGH / VIDEOS ===== -->
+  <div style="margin: 3rem 0 2rem;">
+    <div class="section-title"><i class="fas fa-play-circle"></i><h2>Project Walkthrough</h2><span style="font-size: 0.9rem; font-weight: 400; color: #8892b0; margin-left: 0.5rem;">See Jenny's Cosmetics in action</span></div>
+    
+    <!-- Frontend videos -->
+    <h3 style="margin-bottom: 1rem; font-weight: 500; color: #b9a6ff;"><i class="fas fa-store"></i> Frontend Experience</h3>
+    <div class="card-grid">
+      <div class="video-card">
+        <div class="video-wrapper" onclick="openVideoPopup(this.querySelector('video'))">
+          <video controls preload="metadata" poster="../assets/images/jenny's-hero.png">
+            <source src="../assets/videos/homepage-walkthrough.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <span class="duration">01:12</span>
+        </div>
+        <h4>Homepage Walkthrough</h4>
+        <p>A complete overview of the homepage design, featured sections and overall user experience.</p>
+      </div>
+      <div class="video-card">
+        <div class="video-wrapper" onclick="openVideoPopup(this.querySelector('video'))">
+          <video controls preload="metadata" poster="../assets/images/jenny's-shop.png">
+            <source src="../assets/videos/product-browsing.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <span class="duration">01:08</span>
+        </div>
+        <h4>Product Browsing</h4>
+        <p>Explore how users can browse products, navigate the collection and view product details.</p>
+      </div>
+      <div class="video-card">
+        <div class="video-wrapper" onclick="openVideoPopup(this.querySelector('video'))">
+          <video controls preload="metadata" poster="../assets/images/jenny's-cart.png">
+            <source src="../assets/videos/ecommerce-cart.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <span class="duration">01:05</span>
+        </div>
+        <h4>E‑Commerce Functionality</h4>
+        <p>Demonstrates the shopping cart, quantity management and checkout flow.</p>
+      </div>
+    </div>
+
+    <!-- Dashboard videos -->
+    <h3 style="margin: 2.5rem 0 1rem; font-weight: 500; color: #82e0ff;"><i class="fas fa-user-cog"></i> Admin Dashboard</h3>
+    <div class="card-grid">
+      <div class="video-card">
+        <div class="video-wrapper" onclick="openVideoPopup(this.querySelector('video'))">
+          <video controls preload="metadata" poster="../assets/images/Jenny's-dashboard.png">
+            <source src="../assets/videos/dashboard-overview.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <span class="duration">01:20</span>
+        </div>
+        <h4>Dashboard Overview</h4>
+        <p>Admin panel with real-time stats, order tracking, and quick actions.</p>
+      </div>
+      <div class="video-card">
+        <div class="video-wrapper" onclick="openVideoPopup(this.querySelector('video'))">
+          <video controls preload="metadata" poster="../assets/images/Jenny's-product.png">
+            <source src="../assets/videos/dashboard-products.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <span class="duration">01:35</span>
+        </div>
+        <h4>Product Management</h4>
+        <p>Add, edit, delete products with image upload and stock management.</p>
+      </div>
+      <div class="video-card">
+        <div class="video-wrapper" onclick="openVideoPopup(this.querySelector('video'))">
+          <video controls preload="metadata" poster="../assets/images/Jenny's-order.png">
+            <source src="../assets/videos/dashboard-orders.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <span class="duration">01:15</span>
+        </div>
+        <h4>Order & User Management</h4>
+        <p>Manage orders, update status, and handle customer accounts.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TECHNOLOGIES + KEY FEATURES ===== -->
+  <div class="double-card">
+    <div class="glass" style="padding: 1.8rem 2rem;">
+      <h3 style="display: flex; align-items: center; gap: 0.6rem;"><i class="fas fa-microchip" style="color: #b9a6ff;"></i> Technologies Used</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem;">
+        <span class="tech-badge"><i class="fab fa-html5"></i>HTML5</span>
+        <span class="tech-badge"><i class="fab fa-css3-alt"></i>CSS3</span>
+        <span class="tech-badge"><i class="fab fa-js"></i>JavaScript</span>
+        <span class="tech-badge"><i class="fab fa-php"></i>PHP</span>
+        <span class="tech-badge"><i class="fas fa-database"></i>MySQL</span>
+        <span class="tech-badge"><i class="fas fa-server"></i>XAMPP</span>
+      </div>
+    </div>
+    <div class="glass" style="padding: 1.8rem 2rem;">
+      <h3 style="display: flex; align-items: center; gap: 0.6rem;"><i class="fas fa-star" style="color: #b9a6ff;"></i> Key Features</h3>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Responsive Design</li>
+        <li><i class="fas fa-check-circle"></i> Product Management</li>
+        <li><i class="fas fa-check-circle"></i> Product Browsing</li>
+        <li><i class="fas fa-check-circle"></i> Shopping Cart</li>
+        <li><i class="fas fa-check-circle"></i> User Authentication</li>
+        <li><i class="fas fa-check-circle"></i> Database Integration</li>
+        <li><i class="fas fa-check-circle"></i> Modern UI/UX</li>
+        <li><i class="fas fa-check-circle"></i> Full E‑Commerce Flow</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== DEVELOPMENT DETAILS ===== -->
+  <div style="margin: 2rem 0;">
+    <div class="glass" style="padding: 2rem 2.2rem;">
+      <h3 style="display: flex; align-items: center; gap: 0.6rem;"><i class="fas fa-code-branch" style="color: #b9a6ff;"></i> Development</h3>
+      <p style="color: #c8d4f0; max-width: 80%;">Built as a full‑stack web development project using HTML, CSS and JavaScript for the front end, with PHP and MySQL powering the back‑end and database functionality. XAMPP was used as the local development environment.</p>
+      <div class="dev-grid">
+        <div class="dev-item"><i class="fas fa-laptop-code"></i><div style="font-weight: 600;">Frontend</div><div style="font-size:0.75rem; color:#aab4d0;">HTML5 / CSS3 / JS</div></div>
+        <div class="dev-item"><i class="fas fa-server"></i><div style="font-weight: 600;">Backend</div><div style="font-size:0.75rem; color:#aab4d0;">PHP</div></div>
+        <div class="dev-item"><i class="fas fa-database"></i><div style="font-weight: 600;">Database</div><div style="font-size:0.75rem; color:#aab4d0;">MySQL</div></div>
+        <div class="dev-item"><i class="fas fa-cubes"></i><div style="font-weight: 600;">Environment</div><div style="font-size:0.75rem; color:#aab4d0;">XAMPP</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FINAL CTA ===== -->
+  <div class="cta-card">
+    <h2 style="font-size: 2rem;">Interested in the project?</h2>
+    <p style="color: #c0ccec; font-size: 1.05rem; max-width: 500px; margin: 0.8rem auto 1.8rem;">Explore more of my web development and digital marketing projects.</p>
+    <a href="../index.html#projects" class="btn-primary"><i class="fas fa-arrow-right" style="margin-right: 8px;"></i>View More Projects →</a>
+  </div>
+
+  <div style="margin-top:D 2.5rem; text-align: center; font-size: 0.75rem; color: #3f4560; border-top: 1px solid rgba(160,130,255,0.05); padding-top: 1.8rem;">
+    Jenny's Cosmetics · case study · built with <i class="fas fa-heart" style="color: #7b5cff; font-size: 0.6rem;"></i>
+  </div>
+
+</div>
+
+<!-- ===== LIGHTBOX (Image Popup) ===== -->
+<div class="lightbox" id="imageLightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></span>
+  <img id="lightboxImg" src="" alt="Project screenshot">
+</div>
+
+<!-- ===== VIDEO POPUP (Full screen like YouTube) ===== -->
+<div class="video-popup" id="videoPopup" onclick="closeVideoPopup(event)">
+  <div class="popup-content" onclick="event.stopPropagation();">
+    <span class="popup-close" onclick="closeVideoPopup()"><i class="fas fa-times"></i></span>
+    <video id="popupVideo" controls autoplay preload="metadata"></video>
+  </div>
+</div>
+
+<script>
+  // ---- Image Lightbox ----
+  function openLightbox(src) {
+    if (!src || src === '') return;
+    const lightbox = document.getElementById('imageLightbox');
+    const img = document.getElementById('lightboxImg');
+    img.src = src;
+    lightbox.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('imageLightbox').classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+  // close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeLightbox();
+      closeVideoPopup();
+    }
+  });
+
+  // ---- Video Popup (like YouTube) ----
+  function openVideoPopup(videoElement) {
+    if (!videoElement) return;
+    const popup = document.getElementById('videoPopup');
+    const popupVideo = document.getElementById('popupVideo');
+    // Get the source from the clicked video
+    const source = videoElement.querySelector('source');
+    if (source) {
+      popupVideo.src = source.src;
+      popupVideo.load();
+      // copy poster if exists
+      if (videoElement.poster) popupVideo.poster = videoElement.poster;
+    } else {
+      // if video has src directly
+      if (videoElement.src) {
+        popupVideo.src = videoElement.src;
+        popupVideo.load();
+      }
+    }
+    popup.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    // Pause the original video
+    videoElement.pause();
+  }
+  function closeVideoPopup(event) {
+    const popup = document.getElementById('videoPopup');
+    const popupVideo = document.getElementById('popupVideo');
+    popup.classList.remove('show');
+    popupVideo.pause();
+    popupVideo.src = '';
+    document.body.style.overflow = 'auto';
+  }
+  // close video popup on ESC already handled above
+  // Also close if backdrop clicked (already via onclick on .video-popup)
+</script>
+</body>
+</html>
+```

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.
+  <title>Azure Grand Resort · Luxury Hotel Website</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+
+  <style>
+    :root {
+      --navy: #0B2545;
+      --navy-dark: #071A31;
+      --gold: #D4AF37;
+      --ivory: #F8F7F3;
+      --white: #ffffff;
+      --text: #17202b;
+      --muted: #667085;
+      --line: rgba(11, 37, 69, 0.12);
+      --soft: #f2f4f6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--ivory);
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1.5rem;
+    }
+
+    .container { max-width: 1300px; margin: 0 auto; }
+
+    .glass {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 1.8rem;
+      box-shadow: 0 18px 45px rgba(11, 37, 69, 0.08);
+    }
+
+    .badge {
+      background: var(--navy);
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      border-radius: 100px;
+      padding: .35rem 1rem;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: inline-block;
+    }
+
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      letter-spacing: -.025em;
+    }
+
+    h1 { font-size: 3.2rem; line-height: 1.1; color: var(--navy); }
+    h2 { font-size: 2.1rem; margin-bottom: 1.1rem; color: var(--navy); }
+    h3 { font-size: 1.35rem; color: var(--navy); }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .section-title i { color: var(--gold); font-size: 1.45rem; }
+
+    .hero-flex {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      margin: 1.2rem 0 3rem;
+    }
+
+    .hero-left { flex: 1.1; }
+    .hero-right { flex: 1; }
+
+    .hero-left p {
+      font-size: 1.05rem;
+      color: #526071;
+      max-width: 650px;
+      margin: .9rem 0 1.3rem;
+    }
+
+    .hero-img {
+      height: 310px;
+      border-radius: 1.8rem;
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, .45);
+      background: var(--navy);
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 20px 50px rgba(11, 37, 69, .16);
+    }
+
+    .hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-fallback,
+    .page-fallback {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: .4rem;
+      color: rgba(255,255,255,.7);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .hero-fallback i { color: var(--gold); font-size: 2.3rem; }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+    }
+
+    .tech-stack span,
+    .tech-badge {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 60px;
+      padding: .4rem .9rem;
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .overview {
+      padding: 2rem 2.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .overview > p {
+      color: #526071;
+      max-width: 900px;
+      font-size: 1rem;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1.7rem;
+    }
+
+    .stat-card {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 1.2rem;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .stat-card .label {
+      display: block;
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+    }
+
+    .stat-card .value {
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: .2rem;
+    }
+
+    .showcase-section { margin: 3rem 0; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .page-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 1.5rem;
+      padding: 1rem;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      cursor: pointer;
+    }
+
+    .page-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212, 175, 55, .55);
+      box-shadow: 0 18px 35px rgba(11, 37, 69, .10);
+    }
+
+    .page-img {
+      width: 100%;
+      height: 155px;
+      object-fit: cover;
+      border-radius: 1rem;
+      background: var(--navy);
+      border: 1px solid var(--line);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .page-number {
+      font-size: .67rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: .08em;
+    }
+
+    .page-card h4 {
+      color: var(--navy);
+      margin: .25rem 0 .45rem;
+      font-size: 1.08rem;
+    }
+
+    .page-card p {
+      font-size: .86rem;
+      color: #667085;
+      margin-bottom: .75rem;
+    }
+
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .feature-tags span {
+      background: #f5f6f7;
+      border: 1px solid var(--line);
+      border-radius: 40px;
+      padding: .2rem .65rem;
+      font-size: .62rem;
+      font-weight: 600;
+      color: #44505e;
+    }
+
+    .video-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 1.5rem;
+      padding: 1rem;
+    }
+
+    .video-wrapper {
+      border-radius: 1rem;
+      overflow: hidden;
+      background: var(--navy);
+      margin-bottom: .9rem;
+      cursor: pointer;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: 175px;
+      object-fit: cover;
+      display: block;
+      background: var(--navy-dark);
+    }
+
+    .video-card h4 {
+      color: var(--navy);
+      font-size: 1rem;
+      margin-bottom: .2rem;
+    }
+
+    .video-card p {
+      font-size: .84rem;
+      color: var(--muted);
+    }
+
+    .double-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .info-card {
+      padding: 1.8rem 2rem;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      margin-top: 1rem;
+    }
+
+    .tech-badge i {
+      color: var(--gold);
+      margin-right: .35rem;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .65rem 1rem;
+      margin-top: 1rem;
+    }
+
+    .feature-list li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .9rem;
+      color: #44505e;
+    }
+
+    .feature-list i { color: var(--gold); font-size: .75rem; }
+
+    .development {
+      padding: 2rem 2.2rem;
+      margin: 2rem 0;
+    }
+
+    .development > p {
+      color: #526071;
+      max-width: 900px;
+    }
+
+    .dev-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .dev-item {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 1.2rem;
+      padding: 1.2rem .8rem;
+      text-align: center;
+    }
+
+    .dev-item i {
+      font-size: 1.7rem;
+      color: var(--gold);
+      margin-bottom: .45rem;
+    }
+
+    .dev-item strong { display: block; color: var(--navy); }
+    .dev-item span { font-size: .72rem; color: var(--muted); }
+
+    .cta-card {
+      background: var(--navy);
+      border: 1px solid rgba(212, 175, 55, .45);
+      border-radius: 2rem;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      margin-top: 2.5rem;
+      color: white;
+    }
+
+    .cta-card h2 { color: white; }
+    .cta-card p { color: rgba(255,255,255,.72); max-width: 600px; margin: .7rem auto 1.7rem; }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: 60px;
+      padding: .85rem 1.8rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #e2c45a;
+    }
+
+    .footer-note {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: .72rem;
+      color: #87909b;
+      border-top: 1px solid var(--line);
+      padding-top: 1.5rem;
+    }
+
+    /* Image lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 12, 22, .94);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .lightbox.show { display: flex; }
+
+    .lightbox img {
+      max-width: 92%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 1rem;
+      border: 1px solid rgba(212,175,55,.4);
+    }
+
+    .lightbox-close,
+    .popup-close {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      color: white;
+      background: rgba(11,37,69,.9);
+      border: 1px solid rgba(212,175,55,.4);
+      cursor: pointer;
+      font-size: 1.4rem;
+    }
+
+    .lightbox-close {
+      top: 22px;
+      right: 25px;
+    }
+
+    /* Video popup */
+    .video-popup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 12, 22, .96);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .video-popup.show { display: flex; }
+
+    .popup-content {
+      position: relative;
+      width: 92%;
+      max-width: 1000px;
+      background: #000;
+      border-radius: 1.4rem;
+      overflow: hidden;
+      border: 1px solid rgba(212,175,55,.4);
+    }
+
+    .popup-content video {
+      width: 100%;
+      max-height: 80vh;
+      display: block;
+      background: #000;
+    }
+
+    .popup-close {
+      top: 14px;
+      right: 14px;
+      z-index: 5;
+    }
+
+    @media (max-width: 900px) {
+      h1 { font-size: 2.5rem; }
+      .hero-flex { flex-direction: column; align-items: stretch; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .double-card { grid-template-columns: 1fr; }
+      .dev-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      h1 { font-size: 2.1rem; }
+      h2 { font-size: 1.7rem; }
+      .overview, .development, .info-card { padding: 1.4rem; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .feature-list { grid-template-columns: 1fr; }
+      .dev-grid { grid-template-columns: 1fr 1fr; }
+      .hero-img { height: 230px; }
+      .lightbox, .video-popup { padding: 1rem; }
+      .popup-content { width: 98%; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero-flex">
+    <div class="hero-left">
+      <span class="badge"><i class="fas fa-hotel" style="margin-right:6px;"></i> WORDPRESS HOTEL WEBSITE</span>
+      <h1 style="margin-top:.65rem;">Azure Grand Resort</h1>
+
+      <p>
+        A premium luxury hotel and resort website designed and developed in
+        WordPress with Elementor Pro, focusing on elegant presentation,
+        intuitive navigation, responsive layouts, and a refined hospitality experience.
+      </p>
+
+      <div class="tech-stack">
+        <span>WordPress</span>
+        <span>Elementor Pro</span>
+        <span>Custom CSS</span>
+        <span>Responsive Design</span>
+        <span>UI/UX Design</span>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-img" onclick="openLightbox(this.querySelector('img')?.src || '')">
+        <img src="../assets/images/azure-grand-home.png"
+             alt="Azure Grand Resort homepage preview"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+        <div class="hero-fallback">
+          <i class="fas fa-hotel"></i>
+          <span>Insert Azure Grand Resort homepage screenshot</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECT OVERVIEW ===== -->
+  <section class="glass overview">
+    <div class="section-title">
+      <i class="fas fa-layer-group"></i>
+      <h2>Project Overview</h2>
+    </div>
+
+    <p>
+      Azure Grand Resort is a luxury hospitality website created to present the
+      resort, rooms and suites, dining experience, and booking journey through
+      a clean and premium digital interface. The website was built in WordPress
+      using Elementor Pro with custom styling and responsive layouts.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="label">Project Type</span>
+        <div class="value">Hotel &amp; Hospitality</div>
+      </div>
+      <div class="stat-card">
+        <span class="label">Role</span>
+        <div class="value">Web Developer</div>
+      </div>
+      <div class="stat-card">
+        <span class="label">Platform</span>
+        <div class="value">WordPress</div>
+      </div>
+      <div class="stat-card">
+        <span class="label">Builder</span>
+        <div class="value">Elementor Pro</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WEBSITE PAGES ===== -->
+  <section class="showcase-section">
+    <div class="section-title">
+      <i class="fas fa-window-maximize"></i>
+      <h2>Website Pages Showcase</h2>
+    </div>
+
+    <div class="card-grid">
+
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/azure-grand-home.png"
+             alt="Azure Grand Resort Homepage"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="page-fallback" style="height:155px;background:var(--navy);border-radius:1rem;">
+          <i class="fas fa-image"></i><span>Insert homepage screenshot</span>
+        </div>
+        <div class="page-number">PAGE 01</div>
+        <h4>Homepage</h4>
+        <p>A premium landing experience introducing Azure Grand Resort and its hospitality offering.</p>
+        <div class="feature-tags">
+          <span>Hero Section</span><span>Resort Intro</span><span>Premium UI</span>
+        </div>
+      </div>
+
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/azure-grand-rooms.png"
+             alt="Azure Grand Resort Rooms page"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="page-fallback" style="height:155px;background:var(--navy);border-radius:1rem;">
+          <i class="fas fa-bed"></i><span>Insert rooms screenshot</span>
+        </div>
+        <div class="page-number">PAGE 02</div>
+        <h4>Rooms &amp; Suites</h4>
+        <p>A dedicated room showcase presenting the resort's accommodation options.</p>
+        <div class="feature-tags">
+          <span>Room Cards</span><span>Suite Showcase</span><span>Responsive Layout</span>
+        </div>
+      </div>
+
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/azure-premium-ocean-suite.png"
+             alt="Premium Ocean Suite page"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="page-fallback" style="height:155px;background:var(--navy);border-radius:1rem;">
+          <i class="fas fa-water"></i><span>Insert Premium Ocean Suite screenshot</span>
+        </div>
+        <div class="page-number">PAGE 03</div>
+        <h4>Premium Ocean Suite</h4>
+        <p>A detailed suite presentation designed around an upscale and immersive guest experience.</p>
+        <div class="feature-tags">
+          <span>Suite Details</span><span>Luxury Presentation</span><span>CTA</span>
+        </div>
+      </div>
+
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/azure-restaurant.png"
+             alt="Azure Grand Resort Restaurant page"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="page-fallback" style="height:155px;background:var(--navy);border-radius:1rem;">
+          <i class="fas fa-utensils"></i><span>Insert restaurant screenshot</span>
+        </div>
+        <div class="page-number">PAGE 04</div>
+        <h4>Restaurant &amp; Dining</h4>
+        <p>A dedicated dining experience page aligned with the resort's luxury visual identity.</p>
+        <div class="feature-tags">
+          <span>Dining</span><span>Hospitality</span><span>Premium UI</span>
+        </div>
+      </div>
+
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/azure-booking.png"
+             alt="Azure Grand Resort booking section"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="page-fallback" style="height:155px;background:var(--navy);border-radius:1rem;">
+          <i class="fas fa-calendar-check"></i><span>Insert booking screenshot</span>
+        </div>
+        <div class="page-number">PAGE 05</div>
+        <h4>Booking Section</h4>
+        <p>A clear booking-focused call-to-action and popup journey for guests.</p>
+        <div class="feature-tags">
+          <span>Book Now CTA</span><span>Popup</span><span>Guest Journey</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ROOMS SHOWCASE ===== -->
+  <section class="showcase-section">
+    <div class="section-title">
+      <i class="fas fa-bed"></i>
+      <h2>Rooms &amp; Suites Showcase</h2>
+    </div>
+
+    <div class="card-grid">
+
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/azure-deluxe-garden-room.png"
+             alt="Deluxe Garden Room"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="page-fallback" style="height:155px;background:var(--navy);border-radius:1rem;">
+          <i class="fas fa-leaf"></i><span>Insert Deluxe Garden Room screenshot</span>
+        </div>
+        <div class="page-number">ROOM 01</div>
+        <h4>Deluxe Garden Room</h4>
+        <p>A refined room presentation designed for a calm and comfortable stay.</p>
+        <div class="feature-tags">
+          <span>Room Details</span><span>Luxury Layout</span>
+        </div>
+      </div>
+
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/azure-royal-presidential-suite.png"
+             alt="Royal Presidential Suite"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="page-fallback" style="height:155px;background:var(--navy);border-radius:1rem;">
+          <i class="fas fa-crown"></i><span>Insert Royal Presidential Suite screenshot</span>
+        </div>
+        <div class="page-number">ROOM 02</div>
+        <h4>Royal Presidential Suite</h4>
+        <p>A high-end suite presentation built to communicate exclusivity and elegance.</p>
+        <div class="feature-tags">
+          <span>Suite Details</span><span>Premium Design</span>
+        </div>
+      </div>
+
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/azure-rooms-overview.png"
+             alt="Azure Grand Resort rooms overview"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="page-fallback" style="height:155px;background:var(--navy);border-radius:1rem;">
+          <i class="fas fa-list"></i><span>Insert rooms overview screenshot</span>
+        </div>
+        <div class="page-number">ROOMS</div>
+        <h4>Rooms Overview</h4>
+        <p>A structured overview that helps visitors compare the available room and suite options.</p>
+        <div class="feature-tags">
+          <span>Room Cards</span><span>Navigation</span>
+        </div>
+      </div>
+
+      <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
+        <img class="page-img" src="../assets/images/azure-resort-experience.png"
+             alt="Azure Grand Resort experience"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="page-fallback" style="height:155px;background:var(--navy);border-radius:1rem;">
+          <i class="fas fa-spa"></i><span>Insert resort experience screenshot</span>
+        </div>
+        <div class="page-number">EXPERIENCE</div>
+        <h4>Resort Experience</h4>
+        <p>A visual presentation focused on the overall atmosphere and premium hospitality experience.</p>
+        <div class="feature-tags">
+          <span>Visual Storytelling</span><span>Hospitality</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== PROJECT WALKTHROUGH ===== -->
+  <section class="showcase-section">
+    <div class="section-title">
+      <i class="fas fa-play-circle"></i>
+      <h2>Project Walkthrough</h2>
+      <span style="font-size:.85rem;font-weight:400;color:var(--muted);">See Azure Grand Resort in action</span>
+    </div>
+
+    <div class="card-grid">
+
+      <div class="video-card">
+        <div class="video-wrapper" onclick="openVideoPopup(this.querySelector('video'))">
+          <video controls preload="metadata" poster="../assets/images/azure-grand-home.png">
+            <source src="../assets/videos/azure-homepage-walkthrough.mp4" type="video/mp4">
+          </video>
+        </div>
+        <h4>Homepage Walkthrough</h4>
+        <p>A walkthrough of the resort homepage, sections, navigation and overall visual experience.</p>
+      </div>
+
+
+      <div class="video-card">
+        <div class="video-wrapper" onclick="openVideoPopup(this.querySelector('video'))">
+          <video controls preload="metadata" poster="../assets/images/azure-booking.png">
+            <source src="../assets/videos/azure-booking-walkthrough.mp4" type="video/mp4">
+          </video>
+        </div>
+        <h4>Booking Journey</h4>
+        <p>Demonstrates the Book Now call-to-action and booking popup experience.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== TECHNOLOGIES + KEY FEATURES ===== -->
+  <section class="double-card">
+    <div class="glass info-card">
+      <h3><i class="fas fa-microchip" style="color:var(--gold);margin-right:.45rem;"></i> Technologies Used</h3>
+
+      <div class="tech-list">
+        <span class="tech-badge"><i class="fab fa-wordpress"></i>WordPress</span>
+        <span class="tech-badge"><i class="fas fa-layer-group"></i>Elementor Pro</span>
+        <span class="tech-badge"><i class="fas fa-code"></i>Custom CSS</span>
+        <span class="tech-badge"><i class="fas fa-mobile-alt"></i>Responsive Design</span>
+        <span class="tech-badge"><i class="fas fa-pencil-ruler"></i>UI/UX Design</span>
+      </div>
+    </div>
+
+    <div class="glass info-card">
+      <h3><i class="fas fa-star" style="color:var(--gold);margin-right:.45rem;"></i> Key Features</h3>
+
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Responsive Design</li>
+        <li><i class="fas fa-check-circle"></i> Luxury Visual Identity</li>
+        <li><i class="fas fa-check-circle"></i> Rooms &amp; Suites</li>
+        <li><i class="fas fa-check-circle"></i> Individual Room Pages</li>
+        <li><i class="fas fa-check-circle"></i> Restaurant / Dining</li>
+        <li><i class="fas fa-check-circle"></i> Book Now CTA</li>
+        <li><i class="fas fa-check-circle"></i> Booking Popup</li>
+        <li><i class="fas fa-check-circle"></i> Elementor-Based Layouts</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== DEVELOPMENT ===== -->
+  <section class="glass development">
+    <div class="section-title">
+      <i class="fas fa-code-branch"></i>
+      <h2>Development</h2>
+    </div>
+
+    <p>
+      The website was developed in WordPress using Elementor Pro to build and
+      arrange the page layouts. Custom CSS was used where needed to refine
+      spacing, visual details, responsive behavior, and the premium hotel
+      presentation. The design follows a navy, gold, and ivory visual system
+      to maintain a sophisticated hospitality aesthetic.
+    </p>
+
+    <div class="dev-grid">
+      <div class="dev-item">
+        <i class="fab fa-wordpress"></i>
+        <strong>Platform</strong>
+        <span>WordPress</span>
+      </div>
+
+      <div class="dev-item">
+        <i class="fas fa-layer-group"></i>
+        <strong>Builder</strong>
+        <span>Elementor Pro</span>
+      </div>
+
+      <div class="dev-item">
+        <i class="fas fa-code"></i>
+        <strong>Styling</strong>
+        <span>Custom CSS</span>
+      </div>
+
+      <div class="dev-item">
+        <i class="fas fa-mobile-alt"></i>
+        <strong>Responsive</strong>
+        <span>Desktop / Tablet / Mobile</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-card">
+    <h2>Interested in the project?</h2>
+    <p>
+      Explore more of my web development and digital marketing projects.
+    </p>
+
+    <a href="../index.html#projects" class="btn-primary">
+      <i class="fas fa-arrow-right" style="margin-right:7px;"></i>
+      View More Projects
+    </a>
+  </section>
+
+  <div class="footer-note">
+    Azure Grand Resort · Hotel Website Case Study · WordPress + Elementor Pro
+  </div>
+
+</div>
+
+<!-- ===== IMAGE LIGHTBOX ===== -->
+<div class="lightbox" id="imageLightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">
+    <i class="fas fa-times"></i>
+  </span>
+  <img id="lightboxImg" src="" alt="Azure Grand Resort project screenshot">
+</div>
+
+<!-- ===== VIDEO POPUP ===== -->
+<div class="video-popup" id="videoPopup" onclick="closeVideoPopup(event)">
+  <div class="popup-content" onclick="event.stopPropagation();">
+    <span class="popup-close" onclick="closeVideoPopup()">
+      <i class="fas fa-times"></i>
+    </span>
+    <video id="popupVideo" controls autoplay preload="metadata"></video>
+  </div>
+</div>
+
+<script>
+  // Image lightbox
+  function openLightbox(src) {
+    if (!src) return;
+    const lightbox = document.getElementById('imageLightbox');
+    const img = document.getElementById('lightboxImg');
+    img.src = src;
+    lightbox.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('imageLightbox').classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Video popup
+  function openVideoPopup(videoElement) {
+    if (!videoElement) return;
+
+    const popup = document.getElementById('videoPopup');
+    const popupVideo = document.getElementById('popupVideo');
+    const source = videoElement.querySelector('source');
+
+    if (source) {
+      popupVideo.src = source.src;
+      popupVideo.poster = videoElement.poster || '';
+      popupVideo.load();
+    } else if (videoElement.src) {
+      popupVideo.src = videoElement.src;
+      popupVideo.load();
+    }
+
+    popup.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    videoElement.pause();
+  }
+
+  function closeVideoPopup(event) {
+    const popup = document.getElementById('videoPopup');
+    const popupVideo = document.getElementById('popupVideo');
+
+    popup.classList.remove('show');
+    popupVideo.pause();
+    popupVideo.src = '';
+    popupVideo.removeAttribute('poster');
+    document.body.style.overflow = 'auto';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeLightbox();
+      closeVideoPopup();
+    }
+  });
+</script>
+</body>
+</html>
