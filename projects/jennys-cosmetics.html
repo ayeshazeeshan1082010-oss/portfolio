@@ -7,274 +7,444 @@
   <!-- Font & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
   <style>
+    :root {
+      /* Coffee + Cream Theme */
+      --bg: #F9F6F1;
+      --bg-alt: #F2ECE2;
+      --surface: #FFFFFF;
+      --surface-alt: #FBF8F3;
+
+      --coffee: #6B4423;
+      --coffee-deep: #523318;
+      --coffee-soft: #E8DBC9;
+
+      --caramel: #B8935A;
+      --caramel-soft: #F0E4D0;
+
+      --text: #2C1E12;
+      --text-soft: #5A4A3A;
+      --text-muted: #8B7A67;
+
+      --line: #E5DCCC;
+      --line-strong: #D1C2A8;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      background: #0a0a12;
-      font-family: 'Inter', sans-serif;
-      color: #eef2f8;
-      line-height: 1.5;
+      background: var(--bg);
+      font-family: var(--font-body);
+      color: var(--text);
+      line-height: 1.6;
       padding: 2rem 1.5rem;
+      -webkit-font-smoothing: antialiased;
     }
+
     .container { max-width: 1300px; margin: 0 auto; }
+
     .glass {
-      background: rgba(20, 22, 36, 0.65);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border: 1px solid rgba(160, 130, 255, 0.15);
+      background: var(--surface);
+      border: 1px solid var(--line);
       border-radius: 2rem;
-      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 4px 20px -8px rgba(107, 68, 35, 0.08);
     }
-    .glow-border { box-shadow: 0 0 0 1px rgba(160, 130, 255, 0.2), 0 0 30px -8px rgba(140, 90, 255, 0.3); }
+
     .badge-glow {
-      background: linear-gradient(145deg, rgba(140, 90, 255, 0.15), rgba(0, 200, 255, 0.08));
-      border: 1px solid rgba(160, 130, 255, 0.25);
+      background: var(--coffee);
+      border: 1px solid var(--caramel);
       border-radius: 100px;
-      padding: 0.3rem 1rem;
+      padding: 0.35rem 1.1rem;
       font-size: 0.7rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #b9b0ff;
+      color: var(--caramel-soft);
       display: inline-block;
-      backdrop-filter: blur(2px);
     }
-    h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.02em; }
-    h1 { font-size: 3.2rem; line-height: 1.1; }
-    h2 { font-size: 2.2rem; margin-bottom: 1.2rem; }
-    h3 { font-size: 1.4rem; font-weight: 600; }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h1 { font-size: 3.2rem; line-height: 1.1; color: var(--text); font-weight: 500; }
+    h2 { font-size: 2.1rem; margin-bottom: 1.2rem; color: var(--text); font-weight: 500; }
+    h3 { font-size: 1.35rem; font-weight: 600; color: var(--text); }
+
     .section-title {
       display: flex;
       align-items: center;
       gap: 0.8rem;
       margin-bottom: 2rem;
     }
-    .section-title i { color: #b9a6ff; font-size: 1.8rem; }
+
+    .section-title i { color: var(--caramel); font-size: 1.6rem; }
+
     .btn-primary {
-      background: linear-gradient(145deg, #7b5cff, #5f3edc);
+      background: var(--coffee);
       border: none;
       border-radius: 60px;
       padding: 0.9rem 2.4rem;
-      font-weight: 600;
-      color: white;
-      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      font-size: 0.95rem;
       cursor: pointer;
       transition: all 0.25s;
-      box-shadow: 0 8px 20px -6px rgba(100, 70, 255, 0.3);
       display: inline-block;
       text-decoration: none;
+      font-family: var(--font-body);
     }
+
     .btn-primary:hover {
+      background: var(--coffee-deep);
       transform: translateY(-3px);
-      box-shadow: 0 12px 30px -6px #7b5cff;
-      background: linear-gradient(145deg, #8b70ff, #6849e8);
+      box-shadow: 0 12px 24px -10px rgba(107, 68, 35, 0.4);
     }
+
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.8rem;
+      gap: 1.6rem;
       margin: 2rem 0;
     }
+
     .stat-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 1.2rem;
       margin-top: 1.8rem;
     }
+
     .stat-card {
-      background: rgba(12, 14, 26, 0.6);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(160, 130, 255, 0.1);
-      border-radius: 1.5rem;
-      padding: 1.2rem 1rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--line);
+      border-radius: 1.4rem;
+      padding: 1.3rem 1rem;
       text-align: center;
     }
-    .stat-card .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; color: #8892b0; }
-    .stat-card .value { font-weight: 600; font-size: 1.1rem; margin-top: 0.2rem; }
+
+    .stat-card .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .stat-card .value {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 0.25rem;
+      color: var(--text);
+    }
+
     .page-card {
-      background: rgba(14, 16, 30, 0.6);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(160, 130, 255, 0.08);
-      border-radius: 1.8rem;
-      padding: 1.5rem 1.5rem 1.8rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 1.6rem;
+      padding: 1.4rem 1.4rem 1.7rem;
       transition: all 0.25s ease;
       height: 100%;
       display: flex;
       flex-direction: column;
       cursor: pointer;
     }
+
     .page-card:hover {
-      border-color: rgba(160, 130, 255, 0.3);
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px -16px rgba(100, 70, 255, 0.2);
+      border-color: var(--caramel);
+      transform: translateY(-6px);
+      box-shadow: 0 18px 35px -16px rgba(107, 68, 35, 0.2);
     }
+
     .page-img {
       width: 100%;
       height: 140px;
       object-fit: cover;
-      border-radius: 1.2rem;
-      background: #12142a;
-      border: 1px solid rgba(160, 130, 255, 0.1);
-      margin-bottom: 1.2rem;
+      border-radius: 1.1rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--line);
+      margin-bottom: 1.1rem;
       transition: 0.2s;
     }
-    .page-card:hover .page-img { border-color: rgba(160, 130, 255, 0.3); }
-    .page-number { font-size: 0.7rem; font-weight: 600; color: #7b8bb0; letter-spacing: 0.05em; }
-    .page-card h4 { margin: 0.3rem 0 0.5rem; font-size: 1.2rem; }
-    .page-card p { font-size: 0.9rem; color: #b8c4e0; margin-bottom: 0.8rem; flex:1; }
+
+    .page-card:hover .page-img { border-color: var(--caramel); }
+
+    .page-number {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--caramel);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .page-card h4 {
+      margin: 0.35rem 0 0.5rem;
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+
+    .page-card p {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 0.9rem;
+      flex: 1;
+      line-height: 1.6;
+    }
+
     .feature-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem 0.6rem;
       margin-top: 0.5rem;
     }
+
     .feature-tags span {
-      background: rgba(100, 70, 255, 0.08);
-      border: 1px solid rgba(160, 130, 255, 0.1);
+      background: var(--bg-alt);
+      border: 1px solid var(--line);
       border-radius: 40px;
-      padding: 0.2rem 0.8rem;
-      font-size: 0.65rem;
-      font-weight: 500;
-      color: #c2cbf0;
+      padding: 0.22rem 0.8rem;
+      font-size: 0.66rem;
+      font-weight: 600;
+      color: var(--text-soft);
     }
+
     .video-card {
-      background: rgba(14, 16, 30, 0.5);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(160, 130, 255, 0.08);
-      border-radius: 1.8rem;
-      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 1.6rem;
+      padding: 1.4rem;
       transition: 0.25s;
     }
-    .video-card:hover { border-color: rgba(160, 130, 255, 0.2); transform: scale(1.01); }
+
+    .video-card:hover {
+      border-color: var(--caramel);
+      transform: translateY(-4px);
+    }
+
     .video-wrapper {
       position: relative;
-      border-radius: 1.2rem;
+      border-radius: 1.1rem;
       overflow: hidden;
-      background: #0c0e1a;
+      background: var(--bg-alt);
       margin-bottom: 1rem;
+      border: 1px solid var(--line);
     }
+
     .video-wrapper video {
       width: 100%;
       height: 150px;
       object-fit: cover;
       display: block;
-      border-radius: 1.2rem;
-      background: #101224;
+      background: var(--coffee-deep);
     }
+
     .video-wrapper .duration {
       position: absolute;
       bottom: 10px;
       right: 14px;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(2px);
-      padding: 0.2rem 0.7rem;
+      background: var(--coffee);
+      padding: 0.25rem 0.7rem;
       border-radius: 30px;
       font-size: 0.7rem;
-      color: #c8d0f0;
-      border: 1px solid rgba(255,255,255,0.05);
+      font-weight: 600;
+      color: var(--caramel-soft);
       pointer-events: none;
     }
-    .video-card h4 { font-size: 1.1rem; margin-bottom: 0.2rem; }
-    .video-card p { font-size: 0.9rem; color: #b0bcdb; }
+
+    .video-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .video-card p {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
     .double-card {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.8rem;
       margin: 2rem 0;
     }
+
     .tech-badge {
       display: inline-block;
-      background: rgba(20, 22, 40, 0.7);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(160, 130, 255, 0.1);
+      background: var(--bg-alt);
+      border: 1px solid var(--line);
       border-radius: 60px;
       padding: 0.5rem 1.2rem;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 0.85rem;
       margin: 0.2rem 0.3rem;
+      color: var(--text);
     }
-    .tech-badge i { margin-right: 0.4rem; color: #b9a6ff; }
+
+    .tech-badge i {
+      margin-right: 0.45rem;
+      color: var(--caramel);
+    }
+
     .feature-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.5rem 1.2rem;
+      gap: 0.55rem 1.2rem;
       margin-top: 0.5rem;
     }
-    .feature-list li { list-style: none; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
-    .feature-list i { color: #7b5cff; font-size: 0.8rem; }
+
+    .feature-list li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.92rem;
+      color: var(--text-soft);
+    }
+
+    .feature-list i {
+      color: var(--caramel);
+      font-size: 0.8rem;
+    }
+
     .dev-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 1.2rem;
       margin: 1.5rem 0;
     }
+
     .dev-item {
-      background: rgba(12, 14, 26, 0.5);
-      backdrop-filter: blur(4px);
-      border-radius: 1.5rem;
-      padding: 1.2rem 0.8rem;
+      background: var(--bg-alt);
+      border-radius: 1.4rem;
+      padding: 1.3rem 0.8rem;
       text-align: center;
-      border: 1px solid rgba(160, 130, 255, 0.05);
+      border: 1px solid var(--line);
     }
-    .dev-item i { font-size: 1.8rem; color: #b9a6ff; margin-bottom: 0.4rem; }
+
+    .dev-item i {
+      font-size: 1.8rem;
+      color: var(--caramel);
+      margin-bottom: 0.45rem;
+    }
+
+    .dev-item div:first-of-type {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .dev-item div:last-of-type {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
     .cta-card {
-      background: linear-gradient(145deg, rgba(40, 30, 80, 0.3), rgba(10, 20, 40, 0.3));
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(160, 130, 255, 0.15);
-      border-radius: 2.8rem;
+      background: var(--coffee);
+      border: 1px solid var(--caramel);
+      border-radius: 2.4rem;
       padding: 3rem 2.5rem;
       text-align: center;
       margin-top: 2.5rem;
     }
+
+    .cta-card h2 {
+      color: #fff;
+      font-weight: 500;
+      font-size: 2rem;
+    }
+
+    .cta-card p {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 1.02rem;
+      max-width: 500px;
+      margin: 0.8rem auto 1.8rem;
+    }
+
+    .cta-card .btn-primary {
+      background: var(--caramel);
+      color: var(--coffee-deep);
+    }
+
+    .cta-card .btn-primary:hover {
+      background: var(--caramel-soft);
+    }
+
     .hero-flex {
       display: flex;
       align-items: center;
       gap: 3rem;
       margin: 1.5rem 0 3rem;
     }
+
     .hero-left { flex: 1.2; }
     .hero-right { flex: 1; }
+
+    .hero-left p {
+      font-size: 1.08rem;
+      color: var(--text-soft);
+      max-width: 90%;
+      margin: 0.9rem 0 1.2rem;
+      line-height: 1.7;
+    }
+
     .hero-img {
-      background: #12142a;
+      background: var(--bg-alt);
       border-radius: 2rem;
       height: 280px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(160, 130, 255, 0.15);
-      background-image: radial-gradient(circle at 30% 40%, rgba(120, 80, 255, 0.08), transparent 70%);
+      border: 1px solid var(--line-strong);
       font-size: 0.9rem;
-      color: #6b7a9f;
+      color: var(--text-muted);
       flex-direction: column;
       gap: 0.5rem;
       overflow: hidden;
       position: relative;
       cursor: pointer;
+      box-shadow: 0 20px 50px -16px rgba(107, 68, 35, 0.18);
     }
+
     .hero-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       border-radius: 2rem;
     }
-    .hero-img i { font-size: 2.8rem; color: #7b5cff; opacity: 0.3; }
+
+    .hero-img i {
+      font-size: 2.8rem;
+      color: var(--caramel);
+      opacity: 0.5;
+    }
+
     .tech-stack {
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem;
       margin: 1.2rem 0;
     }
+
     .tech-stack span {
-      background: rgba(20, 22, 40, 0.5);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(160, 130, 255, 0.1);
+      background: var(--surface);
+      border: 1px solid var(--line);
       border-radius: 60px;
-      padding: 0.3rem 1rem;
-      font-size: 0.7rem;
-      font-weight: 500;
+      padding: 0.35rem 1rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--coffee);
     }
 
     /* ---- Lightbox / Popup ---- */
@@ -283,105 +453,125 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(44, 30, 18, 0.94);
       z-index: 9999;
       justify-content: center;
       align-items: center;
-      backdrop-filter: blur(8px);
       padding: 2rem;
     }
+
     .lightbox.show { display: flex; }
+
     .lightbox img {
       max-width: 90%;
       max-height: 90%;
       object-fit: contain;
       border-radius: 1.2rem;
-      box-shadow: 0 0 60px rgba(120, 80, 255, 0.15);
-      border: 1px solid rgba(160, 130, 255, 0.2);
+      border: 1px solid var(--caramel);
     }
+
     .lightbox-close {
       position: absolute;
       top: 24px;
       right: 32px;
-      font-size: 2.4rem;
-      color: #b9b0ff;
+      font-size: 2rem;
+      color: #fff;
       cursor: pointer;
       transition: 0.2s;
-      background: rgba(20,22,36,0.6);
-      backdrop-filter: blur(4px);
+      background: var(--coffee);
       border-radius: 60px;
-      width: 54px;
-      height: 54px;
+      width: 52px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(160,130,255,0.2);
+      border: 1px solid var(--caramel);
     }
-    .lightbox-close:hover { color: white; transform: rotate(90deg); background: rgba(100,70,255,0.2); }
 
-    /* ---- Video Popup (like YouTube) ---- */
+    .lightbox-close:hover {
+      background: var(--coffee-deep);
+      transform: rotate(90deg);
+    }
+
+    /* ---- Video Popup ---- */
     .video-popup {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.94);
+      background: rgba(44, 30, 18, 0.96);
       z-index: 10000;
       justify-content: center;
       align-items: center;
-      backdrop-filter: blur(12px);
       padding: 2rem;
     }
+
     .video-popup.show { display: flex; }
+
     .video-popup .popup-content {
       position: relative;
       width: 90%;
       max-width: 1000px;
-      background: #0a0a12;
-      border-radius: 2rem;
+      background: #000;
+      border-radius: 1.4rem;
       overflow: hidden;
-      box-shadow: 0 0 80px rgba(120, 80, 255, 0.1);
-      border: 1px solid rgba(160, 130, 255, 0.15);
+      border: 1px solid var(--caramel);
     }
+
     .video-popup .popup-content video {
       width: 100%;
       max-height: 80vh;
       display: block;
       background: #000;
-      border-radius: 2rem;
     }
+
     .video-popup .popup-close {
       position: absolute;
       top: 16px;
       right: 20px;
-      font-size: 2rem;
-      color: #b9b0ff;
+      font-size: 1.6rem;
+      color: #fff;
       cursor: pointer;
       transition: 0.2s;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(4px);
+      background: var(--coffee);
       border-radius: 60px;
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(160,130,255,0.15);
+      border: 1px solid var(--caramel);
       z-index: 10;
     }
-    .video-popup .popup-close:hover { color: white; background: rgba(100,70,255,0.3); }
 
-    /* responsive */
+    .video-popup .popup-close:hover {
+      background: var(--coffee-deep);
+    }
+
+    .footer-note {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--line);
+      padding-top: 1.8rem;
+    }
+
+    /* Responsive */
     @media (max-width: 900px) {
       .double-card { grid-template-columns: 1fr; }
       h1 { font-size: 2.4rem; }
       .hero-flex { flex-direction: column; }
+      .hero-left p { max-width: 100%; }
     }
+
     @media (max-width: 600px) {
       .feature-list { grid-template-columns: 1fr; }
       .stat-grid { grid-template-columns: 1fr 1fr; }
       .lightbox img { max-width: 98%; }
       .video-popup .popup-content { width: 98%; }
+      h1 { font-size: 2.1rem; }
+      h2 { font-size: 1.7rem; }
     }
   </style>
 </head>
@@ -392,22 +582,21 @@
   <div class="hero-flex">
     <div class="hero-left">
       <span class="badge-glow"><i class="fas fa-code" style="margin-right: 6px;"></i> FULL-STACK E-COMMERCE PROJECT</span>
-      <h1 style="margin-top: 0.6rem;">Jenny's Cosmetics</h1>
-      <p style="font-size: 1.1rem; color: #c8d0ea; max-width: 90%; margin: 0.8rem 0 1.2rem;">
-        A modern e‑commerce website for cosmetics and imitation jewelry, built with a focus on beautiful design, smooth shopping experience, and full‑stack functionality.
+      <h1 style="margin-top: 0.7rem;">Jenny's Cosmetics</h1>
+      <p>
+        A modern e-commerce website for cosmetics and imitation jewelry, built with a focus on beautiful design, smooth shopping experience, and full-stack functionality.
       </p>
       <div class="tech-stack">
         <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>PHP</span><span>MySQL</span><span>XAMPP</span>
       </div>
     </div>
     <div class="hero-right">
-      <div class="hero-img glow-border" style="border: 1px solid rgba(160,130,255,0.2);" onclick="openLightbox(this.querySelector('img')?.src || '')">
+      <div class="hero-img" onclick="openLightbox(this.querySelector('img')?.src || '')">
         <img src="../assets/images/Jenny's-home.png" alt="Jenny's Cosmetics homepage preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div style="display: none; flex-direction: column; align-items: center; gap: 0.3rem;">
+        <div style="display: none; flex-direction: column; align-items: center; gap: 0.4rem;">
           <i class="fas fa-image"></i>
-          <span style="background: rgba(0,0,0,0.2); padding: 0.3rem 1rem; border-radius: 60px; font-size: 0.7rem;">[ INSERT PROJECT SCREENSHOT ]</span>
+          <span style="background: var(--surface); padding: 0.35rem 1rem; border-radius: 60px; font-size: 0.72rem; font-weight: 600; color: var(--text-soft);">[ INSERT PROJECT SCREENSHOT ]</span>
         </div>
-        <span style="font-size:0.65rem; opacity:0.5; position: absolute; bottom: 8px; right: 16px;">Jenny's Cosmetics · preview</span>
       </div>
     </div>
   </div>
@@ -415,13 +604,13 @@
   <!-- ===== PROJECT OVERVIEW ===== -->
   <div class="glass" style="padding: 2rem 2.2rem;">
     <div class="section-title"><i class="fas fa-layer-group"></i><h2>Project Overview</h2></div>
-    <p style="font-size: 1.05rem; max-width: 85%; color: #d0daf5;">
-      Jenny's Cosmetics is a full‑stack e‑commerce website created to provide customers with a smooth and user‑friendly online shopping experience. The website allows users to explore products, view detailed information, manage their selections, and interact with key e‑commerce features.
+    <p style="font-size: 1.05rem; max-width: 85%; color: var(--text-soft); line-height: 1.75;">
+      Jenny's Cosmetics is a full-stack e-commerce website created to provide customers with a smooth and user-friendly online shopping experience. The website allows users to explore products, view detailed information, manage their selections, and interact with key e-commerce features.
     </p>
     <div class="stat-grid">
-      <div class="stat-card"><span class="label">Project Type</span><div class="value">E‑Commerce</div></div>
+      <div class="stat-card"><span class="label">Project Type</span><div class="value">E-Commerce</div></div>
       <div class="stat-card"><span class="label">Role</span><div class="value">Web Developer</div></div>
-      <div class="stat-card"><span class="label">Development</span><div class="value">Full‑Stack</div></div>
+      <div class="stat-card"><span class="label">Development</span><div class="value">Full-Stack</div></div>
       <div class="stat-card"><span class="label">Database</span><div class="value">MySQL</div></div>
     </div>
   </div>
@@ -432,35 +621,35 @@
     <div class="card-grid">
       <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
         <img class="page-img" src="../assets/images/jenny's-hero.png" alt="Homepage" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ INSERT HOMEPAGE ]</div>
+        <div style="display: none; align-items: center; justify-content: center; height:140px; background:var(--bg-alt); border-radius:1.1rem; border:1px dashed var(--line-strong); margin-bottom:1.1rem; color:var(--text-muted); font-size:0.72rem;">[ INSERT HOMEPAGE ]</div>
         <div class="page-number">PAGE 01</div><h4>Homepage</h4>
         <p>A beautiful homepage that introduces the brand and highlights featured products, categories and key shopping sections.</p>
         <div class="feature-tags"><span>Hero Banner</span><span>Featured Products</span><span>Categories</span><span>Brand Highlights</span></div>
       </div>
       <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
         <img class="page-img" src="../assets/images/jenny's-shop.png" alt="Shop Page" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ INSERT SHOP PAGE ]</div>
+        <div style="display: none; align-items: center; justify-content: center; height:140px; background:var(--bg-alt); border-radius:1.1rem; border:1px dashed var(--line-strong); margin-bottom:1.1rem; color:var(--text-muted); font-size:0.72rem;">[ INSERT SHOP PAGE ]</div>
         <div class="page-number">PAGE 02</div><h4>Shop Page</h4>
         <p>Users can explore the complete product collection through an organized product grid.</p>
         <div class="feature-tags"><span>Product Grid</span><span>Product Images</span><span>Product Browsing</span><span>Add to Cart</span></div>
       </div>
       <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
         <img class="page-img" src="../assets/images/jenny's-project-detail.png" alt="Product Details" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ INSERT PRODUCT DETAILS ]</div>
+        <div style="display: none; align-items: center; justify-content: center; height:140px; background:var(--bg-alt); border-radius:1.1rem; border:1px dashed var(--line-strong); margin-bottom:1.1rem; color:var(--text-muted); font-size:0.72rem;">[ INSERT PRODUCT DETAILS ]</div>
         <div class="page-number">PAGE 03</div><h4>Product Details</h4>
         <p>Detailed product pages provide users with product images, descriptions, pricing and shopping actions.</p>
         <div class="feature-tags"><span>Product Images</span><span>Product Info</span><span>Price &amp; Stock</span><span>Add to Cart</span></div>
       </div>
       <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
         <img class="page-img" src="../assets/images/jenny's-cart.png" alt="Shopping Cart" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ INSERT CART ]</div>
+        <div style="display: none; align-items: center; justify-content: center; height:140px; background:var(--bg-alt); border-radius:1.1rem; border:1px dashed var(--line-strong); margin-bottom:1.1rem; color:var(--text-muted); font-size:0.72rem;">[ INSERT CART ]</div>
         <div class="page-number">PAGE 04</div><h4>Shopping Cart</h4>
         <p>Users can review selected products, update quantities and continue toward checkout.</p>
         <div class="feature-tags"><span>Selected Products</span><span>Quantity Update</span><span>Order Summary</span><span>Checkout</span></div>
       </div>
       <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
         <img class="page-img" src="../assets/images/jenny's-login.png" alt="Login / Register" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ INSERT LOGIN ]</div>
+        <div style="display: none; align-items: center; justify-content: center; height:140px; background:var(--bg-alt); border-radius:1.1rem; border:1px dashed var(--line-strong); margin-bottom:1.1rem; color:var(--text-muted); font-size:0.72rem;">[ INSERT LOGIN ]</div>
         <div class="page-number">PAGE 05</div><h4>Login / Register</h4>
         <p>Secure user authentication for account creation and login.</p>
         <div class="feature-tags"><span>User Registration</span><span>User Login</span><span>Form Validation</span><span>Secure Access</span></div>
@@ -473,28 +662,28 @@
       <div class="card-grid">
         <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
           <img class="page-img" src="../assets/images/Jenny's-dashboard.png" alt="Dashboard Overview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ DASHBOARD OVERVIEW ]</div>
+          <div style="display: none; align-items: center; justify-content: center; height:140px; background:var(--bg-alt); border-radius:1.1rem; border:1px dashed var(--line-strong); margin-bottom:1.1rem; color:var(--text-muted); font-size:0.72rem;">[ DASHBOARD OVERVIEW ]</div>
           <div class="page-number">ADMIN 01</div><h4>Dashboard Overview</h4>
           <p>Central admin panel with key metrics, recent orders, and quick actions.</p>
           <div class="feature-tags"><span>Analytics</span><span>Orders</span><span>Products</span><span>Users</span></div>
         </div>
         <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
           <img class="page-img" src="../assets/images/Jenny's-product.png" alt="Product Management" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ PRODUCT MANAGEMENT ]</div>
+          <div style="display: none; align-items: center; justify-content: center; height:140px; background:var(--bg-alt); border-radius:1.1rem; border:1px dashed var(--line-strong); margin-bottom:1.1rem; color:var(--text-muted); font-size:0.72rem;">[ PRODUCT MANAGEMENT ]</div>
           <div class="page-number">ADMIN 02</div><h4>Product Management</h4>
           <p>Add, edit, delete products with image upload and inventory control.</p>
           <div class="feature-tags"><span>CRUD</span><span>Inventory</span><span>Categories</span><span>Images</span></div>
         </div>
         <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
           <img class="page-img" src="../assets/images/Jenny's-order.png" alt="Order Management" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ ORDER MANAGEMENT ]</div>
+          <div style="display: none; align-items: center; justify-content: center; height:140px; background:var(--bg-alt); border-radius:1.1rem; border:1px dashed var(--line-strong); margin-bottom:1.1rem; color:var(--text-muted); font-size:0.72rem;">[ ORDER MANAGEMENT ]</div>
           <div class="page-number">ADMIN 03</div><h4>Order Management</h4>
           <p>View and manage customer orders, update status, and process shipments.</p>
           <div class="feature-tags"><span>Orders</span><span>Status</span><span>Customers</span><span>Shipping</span></div>
         </div>
         <div class="page-card" onclick="openLightbox(this.querySelector('.page-img')?.src || '')">
           <img class="page-img" src="../assets/images/Jenny's-user.png" alt="User Management" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div style="display: none; align-items: center; justify-content: center; height:140px; background:#12142a; border-radius:1.2rem; border:1px dashed rgba(160,130,255,0.2); margin-bottom:1.2rem; color:#6b7a9f; font-size:0.7rem;">[ USER MANAGEMENT ]</div>
+          <div style="display: none; align-items: center; justify-content: center; height:140px; background:var(--bg-alt); border-radius:1.1rem; border:1px dashed var(--line-strong); margin-bottom:1.1rem; color:var(--text-muted); font-size:0.72rem;">[ USER MANAGEMENT ]</div>
           <div class="page-number">ADMIN 04</div><h4>User Management</h4>
           <p>Manage customer accounts, roles, and permissions.</p>
           <div class="feature-tags"><span>Customers</span><span>Roles</span><span>Permissions</span><span>Activity</span></div>
@@ -505,10 +694,14 @@
 
   <!-- ===== PROJECT WALKTHROUGH / VIDEOS ===== -->
   <div style="margin: 3rem 0 2rem;">
-    <div class="section-title"><i class="fas fa-play-circle"></i><h2>Project Walkthrough</h2><span style="font-size: 0.9rem; font-weight: 400; color: #8892b0; margin-left: 0.5rem;">See Jenny's Cosmetics in action</span></div>
-    
+    <div class="section-title">
+      <i class="fas fa-play-circle"></i>
+      <h2>Project Walkthrough</h2>
+      <span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted); margin-left: 0.5rem;">See Jenny's Cosmetics in action</span>
+    </div>
+
     <!-- Frontend videos -->
-    <h3 style="margin-bottom: 1rem; font-weight: 500; color: #b9a6ff;"><i class="fas fa-store"></i> Frontend Experience</h3>
+    <h3 style="margin-bottom: 1rem; font-weight: 600; color: var(--coffee); font-family: var(--font-display);"><i class="fas fa-store" style="color: var(--caramel);"></i> Frontend Experience</h3>
     <div class="card-grid">
       <div class="video-card">
         <div class="video-wrapper" onclick="openVideoPopup(this.querySelector('video'))">
@@ -540,13 +733,13 @@
           </video>
           <span class="duration">01:05</span>
         </div>
-        <h4>E‑Commerce Functionality</h4>
+        <h4>E-Commerce Functionality</h4>
         <p>Demonstrates the shopping cart, quantity management and checkout flow.</p>
       </div>
     </div>
 
     <!-- Dashboard videos -->
-    <h3 style="margin: 2.5rem 0 1rem; font-weight: 500; color: #82e0ff;"><i class="fas fa-user-cog"></i> Admin Dashboard</h3>
+    <h3 style="margin: 2.5rem 0 1rem; font-weight: 600; color: var(--coffee); font-family: var(--font-display);"><i class="fas fa-user-cog" style="color: var(--caramel);"></i> Admin Dashboard</h3>
     <div class="card-grid">
       <div class="video-card">
         <div class="video-wrapper" onclick="openVideoPopup(this.querySelector('video'))">
@@ -578,7 +771,7 @@
           </video>
           <span class="duration">01:15</span>
         </div>
-        <h4>Order & User Management</h4>
+        <h4>Order &amp; User Management</h4>
         <p>Manage orders, update status, and handle customer accounts.</p>
       </div>
     </div>
@@ -587,7 +780,7 @@
   <!-- ===== TECHNOLOGIES + KEY FEATURES ===== -->
   <div class="double-card">
     <div class="glass" style="padding: 1.8rem 2rem;">
-      <h3 style="display: flex; align-items: center; gap: 0.6rem;"><i class="fas fa-microchip" style="color: #b9a6ff;"></i> Technologies Used</h3>
+      <h3 style="display: flex; align-items: center; gap: 0.6rem;"><i class="fas fa-microchip" style="color: var(--caramel);"></i> Technologies Used</h3>
       <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem;">
         <span class="tech-badge"><i class="fab fa-html5"></i>HTML5</span>
         <span class="tech-badge"><i class="fab fa-css3-alt"></i>CSS3</span>
@@ -598,7 +791,7 @@
       </div>
     </div>
     <div class="glass" style="padding: 1.8rem 2rem;">
-      <h3 style="display: flex; align-items: center; gap: 0.6rem;"><i class="fas fa-star" style="color: #b9a6ff;"></i> Key Features</h3>
+      <h3 style="display: flex; align-items: center; gap: 0.6rem;"><i class="fas fa-star" style="color: var(--caramel);"></i> Key Features</h3>
       <ul class="feature-list">
         <li><i class="fas fa-check-circle"></i> Responsive Design</li>
         <li><i class="fas fa-check-circle"></i> Product Management</li>
@@ -607,7 +800,7 @@
         <li><i class="fas fa-check-circle"></i> User Authentication</li>
         <li><i class="fas fa-check-circle"></i> Database Integration</li>
         <li><i class="fas fa-check-circle"></i> Modern UI/UX</li>
-        <li><i class="fas fa-check-circle"></i> Full E‑Commerce Flow</li>
+        <li><i class="fas fa-check-circle"></i> Full E-Commerce Flow</li>
       </ul>
     </div>
   </div>
@@ -615,26 +808,26 @@
   <!-- ===== DEVELOPMENT DETAILS ===== -->
   <div style="margin: 2rem 0;">
     <div class="glass" style="padding: 2rem 2.2rem;">
-      <h3 style="display: flex; align-items: center; gap: 0.6rem;"><i class="fas fa-code-branch" style="color: #b9a6ff;"></i> Development</h3>
-      <p style="color: #c8d4f0; max-width: 80%;">Built as a full‑stack web development project using HTML, CSS and JavaScript for the front end, with PHP and MySQL powering the back‑end and database functionality. XAMPP was used as the local development environment.</p>
+      <h3 style="display: flex; align-items: center; gap: 0.6rem;"><i class="fas fa-code-branch" style="color: var(--caramel);"></i> Development</h3>
+      <p style="color: var(--text-soft); max-width: 80%; line-height: 1.75;">Built as a full-stack web development project using HTML, CSS and JavaScript for the front end, with PHP and MySQL powering the back-end and database functionality. XAMPP was used as the local development environment.</p>
       <div class="dev-grid">
-        <div class="dev-item"><i class="fas fa-laptop-code"></i><div style="font-weight: 600;">Frontend</div><div style="font-size:0.75rem; color:#aab4d0;">HTML5 / CSS3 / JS</div></div>
-        <div class="dev-item"><i class="fas fa-server"></i><div style="font-weight: 600;">Backend</div><div style="font-size:0.75rem; color:#aab4d0;">PHP</div></div>
-        <div class="dev-item"><i class="fas fa-database"></i><div style="font-weight: 600;">Database</div><div style="font-size:0.75rem; color:#aab4d0;">MySQL</div></div>
-        <div class="dev-item"><i class="fas fa-cubes"></i><div style="font-weight: 600;">Environment</div><div style="font-size:0.75rem; color:#aab4d0;">XAMPP</div></div>
+        <div class="dev-item"><i class="fas fa-laptop-code"></i><div>Frontend</div><div>HTML5 / CSS3 / JS</div></div>
+        <div class="dev-item"><i class="fas fa-server"></i><div>Backend</div><div>PHP</div></div>
+        <div class="dev-item"><i class="fas fa-database"></i><div>Database</div><div>MySQL</div></div>
+        <div class="dev-item"><i class="fas fa-cubes"></i><div>Environment</div><div>XAMPP</div></div>
       </div>
     </div>
   </div>
 
   <!-- ===== FINAL CTA ===== -->
   <div class="cta-card">
-    <h2 style="font-size: 2rem;">Interested in the project?</h2>
-    <p style="color: #c0ccec; font-size: 1.05rem; max-width: 500px; margin: 0.8rem auto 1.8rem;">Explore more of my web development and digital marketing projects.</p>
-    <a href="../index.html#projects" class="btn-primary"><i class="fas fa-arrow-right" style="margin-right: 8px;"></i>View More Projects →</a>
+    <h2>Interested in the project?</h2>
+    <p>Explore more of my web development and digital marketing projects.</p>
+    <a href="../index.html#projects" class="btn-primary"><i class="fas fa-arrow-right" style="margin-right: 8px;"></i>View More Projects</a>
   </div>
 
-  <div style="margin-top:D 2.5rem; text-align: center; font-size: 0.75rem; color: #3f4560; border-top: 1px solid rgba(160,130,255,0.05); padding-top: 1.8rem;">
-    Jenny's Cosmetics · case study · built with <i class="fas fa-heart" style="color: #7b5cff; font-size: 0.6rem;"></i>
+  <div class="footer-note">
+    Jenny's Cosmetics · case study · built with <i class="fas fa-heart" style="color: var(--caramel); font-size: 0.65rem;"></i>
   </div>
 
 </div>
@@ -645,7 +838,7 @@
   <img id="lightboxImg" src="" alt="Project screenshot">
 </div>
 
-<!-- ===== VIDEO POPUP (Full screen like YouTube) ===== -->
+<!-- ===== VIDEO POPUP (Full screen) ===== -->
 <div class="video-popup" id="videoPopup" onclick="closeVideoPopup(event)">
   <div class="popup-content" onclick="event.stopPropagation();">
     <span class="popup-close" onclick="closeVideoPopup()"><i class="fas fa-times"></i></span>
@@ -667,7 +860,6 @@
     document.getElementById('imageLightbox').classList.remove('show');
     document.body.style.overflow = 'auto';
   }
-  // close on Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closeLightbox();
@@ -675,28 +867,22 @@
     }
   });
 
-  // ---- Video Popup (like YouTube) ----
+  // ---- Video Popup ----
   function openVideoPopup(videoElement) {
     if (!videoElement) return;
     const popup = document.getElementById('videoPopup');
     const popupVideo = document.getElementById('popupVideo');
-    // Get the source from the clicked video
     const source = videoElement.querySelector('source');
     if (source) {
       popupVideo.src = source.src;
       popupVideo.load();
-      // copy poster if exists
       if (videoElement.poster) popupVideo.poster = videoElement.poster;
-    } else {
-      // if video has src directly
-      if (videoElement.src) {
-        popupVideo.src = videoElement.src;
-        popupVideo.load();
-      }
+    } else if (videoElement.src) {
+      popupVideo.src = videoElement.src;
+      popupVideo.load();
     }
     popup.classList.add('show');
     document.body.style.overflow = 'hidden';
-    // Pause the original video
     videoElement.pause();
   }
   function closeVideoPopup(event) {
@@ -707,9 +893,6 @@
     popupVideo.src = '';
     document.body.style.overflow = 'auto';
   }
-  // close video popup on ESC already handled above
-  // Also close if backdrop clicked (already via onclick on .video-popup)
 </script>
 </body>
 </html>
-```

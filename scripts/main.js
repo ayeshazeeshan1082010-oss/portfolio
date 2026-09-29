@@ -1,9 +1,10 @@
 /**
  * Ayesha Zeeshan Portfolio - Main Interactivity Script
- * Sticky Header, Mobile Drawer, Modal Handler, Form Validation & Scroll Reveal
+ * Sticky Header, Mobile Drawer, Scroll Reveal & Working Contact Form (FormSubmit.co)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+
   /* --- 1. STICKY HEADER SCROLL EFFECT --- */
   const header = document.getElementById('header');
   
@@ -14,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
       header.classList.remove('scrolled');
     }
   }
-
   window.addEventListener('scroll', handleHeaderScroll);
   handleHeaderScroll();
 
@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close menu when clicking nav link
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('open');
@@ -65,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
   window.addEventListener('scroll', highlightNavOnScroll);
 
   /* --- 4. SCROLL REVEAL ANIMATIONS (IntersectionObserver) --- */
@@ -75,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
-        // Once revealed, optional: keep revealed
         observer.unobserve(entry.target);
       }
     });
@@ -87,63 +84,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealElements.forEach(el => revealObserver.observe(el));
 
-  /* --- 5. AZURE GRAND HOTEL MODAL HANDLER --- */
-  const modal = document.getElementById('azure-modal');
-  const azureBtn = document.getElementById('azure-project-btn');
-  const modalCloseBtns = document.querySelectorAll('.close-azure-modal');
+  /* --- 5. CONTACT FORM — WORKING EMAIL DELIVERY via FormSubmit.co --- */
+  /*
+     ⚠️ IMPORTANT — Activate FormSubmit:
+     1. First submit test karo website se
+     2. ayeshazeeshan1082010@gmail.com pe ek email aayegi (FormSubmit se)
+     3. Us email mein "Activate" button pe click karo
+     4. Uske baad saare messages direct Gmail pe aayenge — koi signup nahi
+  */
+  const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/ayeshazeeshan1082010@gmail.com';
 
-  if (modal && azureBtn) {
-    azureBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    });
-
-    modalCloseBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        closeAzureModal();
-      });
-    });
-
-    // Close on backdrop click
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeAzureModal();
-      }
-    });
-
-    // Close on ESC key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        closeAzureModal();
-      }
-    });
-  }
-
-  function closeAzureModal() {
-    if (modal) {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  }
-
-  /* --- 6. CONTACT FORM VALIDATION & SUBMISSION --- */
   const contactForm = document.getElementById('contact-form');
   const successBanner = document.getElementById('form-success');
+  const submitBtn = document.getElementById('submit-btn');
+  const submitText = document.getElementById('submit-text');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       let isValid = true;
 
-      // Fields
       const fullName = document.getElementById('fullName');
       const email = document.getElementById('email');
       const subject = document.getElementById('subject');
       const message = document.getElementById('message');
 
-      // Validation logic
+      // Validation
       if (!fullName.value.trim()) {
         setError(fullName, 'Full name is required');
         isValid = false;
@@ -176,17 +143,63 @@ document.addEventListener('DOMContentLoaded', () => {
         clearError(message);
       }
 
-      if (isValid) {
-        // Show success state
+      if (!isValid) return;
+
+      // Show loading state
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.textContent = 'Sending...';
+
+      const payload = {
+        name: fullName.value.trim(),
+        email: email.value.trim(),
+        subject: subject.value.trim(),
+        message: message.value.trim(),
+        _subject: `Portfolio Message — ${subject.value.trim()}`,
+        _template: 'table',
+        _captcha: 'false',
+      };
+
+      try {
+        const res = await fetch(CONTACT_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error('Request failed');
+
+        // Success
         if (successBanner) {
           successBanner.style.display = 'flex';
         }
         contactForm.reset();
 
-        // Auto-hide success message after 6 seconds
         setTimeout(() => {
           if (successBanner) successBanner.style.display = 'none';
         }, 6000);
+
+      } catch (err) {
+        // Fallback — open user's mail client
+        const mailto = `mailto:ayeshazeeshan1082010@gmail.com?subject=${encodeURIComponent(payload._subject)}&body=${encodeURIComponent(
+          `Name: ${payload.name}\nEmail: ${payload.email}\n\n${payload.message}`
+        )}`;
+        window.location.href = mailto;
+
+        if (successBanner) {
+          successBanner.style.display = 'flex';
+          successBanner.querySelector('span').textContent =
+            "Opening your email app — please send the message from there.";
+        }
+        setTimeout(() => {
+          if (successBanner) successBanner.style.display = 'none';
+        }, 6000);
+
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitText) submitText.textContent = 'Send Message';
       }
     });
   }
@@ -206,4 +219,10 @@ document.addEventListener('DOMContentLoaded', () => {
       parentGroup.classList.remove('invalid');
     }
   }
+
+  // Live clear errors on input
+  document.querySelectorAll('.form-input, .form-textarea').forEach(el => {
+    el.addEventListener('input', () => clearError(el));
+  });
+
 });
