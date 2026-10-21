@@ -221,17 +221,11 @@ ul { list-style: none; }
 }
 
 .logo-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--coffee);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-menu {
