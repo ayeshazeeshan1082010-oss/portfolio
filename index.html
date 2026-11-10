@@ -24,18 +24,19 @@
       /* Certificates Section Styles */
       .certificates-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
+        /* minmax ko 240px kar diya taake 4 cards ek row mein aajayein */
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
         margin-top: 2rem;
-        align-items: stretch; /* Cards ko ek size mein rakhta hai */
+        align-items: stretch;
       }
 
       .certificate-card {
-        padding: 1.5rem;
+        padding: 1rem; /* Padding thodi kam ki hai taake card chota lage */
         display: flex;
         flex-direction: column;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        height: 100%; /* Sab cards ki height same rahegi */
+        height: 100%;
       }
 
       .certificate-card:hover {
@@ -45,11 +46,11 @@
 
       .certificate-image-container {
         width: 100%;
-        height: 350px; /* Fixed height di hai taake sab barabar hon */
+        height: 240px; /* Height kam ki hai taake 4 cards fit hon */
         border-radius: 8px;
         overflow: hidden;
-        margin-bottom: 1.5rem;
-        background: #ffffff; /* White background taake certificate pyara lage */
+        margin-bottom: 1rem;
+        background: #ffffff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -59,9 +60,9 @@
       .certificate-image-container img {
         width: 100%;
         height: 100%;
-        object-fit: contain; /* Ye crop nahi karega, poori image dikhayega */
+        object-fit: contain;
         display: block;
-        padding: 0.5rem; /* Thoda gap taake image kinaron se chipke nahi */
+        padding: 0.5rem;
       }
 
       .certificate-body {
@@ -71,19 +72,19 @@
       }
 
       .certificate-title {
-        font-size: 1.25rem;
+        font-size: 1.1rem; /* Font size thoda adjust kiya hai */
         font-weight: 600;
         margin-bottom: 0.5rem;
         color: var(--text-primary, #ffffff);
       }
 
       .certificate-issuer {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         color: var(--text-muted, #a0a0a0);
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.4rem;
       }
 
       .certificate-issuer i {
@@ -91,12 +92,12 @@
       }
 
       .certificate-meta {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         color: var(--text-muted, #a0a0a0);
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         display: flex;
         flex-wrap: wrap;
-        gap: 1rem;
+        gap: 0.8rem;
       }
 
       .certificate-meta span {
@@ -108,13 +109,13 @@
       .certificate-link {
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
-        font-size: 0.9rem;
+        gap: 0.4rem;
+        font-size: 0.85rem;
         color: var(--primary-color, #007bff);
         text-decoration: none;
         font-weight: 500;
         transition: color 0.2s ease;
-        margin-top: auto; /* Verify link ko hamesha neeche align rakhega */
+        margin-top: auto;
         padding-top: 1rem;
       }
 
@@ -123,12 +124,25 @@
         text-decoration: underline;
       }
 
+      /* Tablet aur Mobile ke liye media queries */
+      @media (max-width: 1200px) {
+        .certificates-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        .certificate-image-container {
+          height: 300px;
+        }
+        .certificate-card {
+           padding: 1.5rem;
+        }
+      }
+
       @media (max-width: 768px) {
         .certificates-grid {
           grid-template-columns: 1fr;
         }
         .certificate-image-container {
-          height: 300px; /* Mobile pe height thodi kam kar di */
+          height: 320px;
         }
       }
     </style>
@@ -923,6 +937,35 @@
                 </div>
                 <a
                   href="https://www.coursera.org/account/accomplishments/verify/95XLUXO0I8YP"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="certificate-link"
+                >
+                  <i class="ri-external-link-line"></i> Verify Certificate
+                </a>
+              </div>
+            </div>
+
+            <!-- Certificate 4: Use AI Responsibly -->
+            <div class="glass-card certificate-card reveal">
+              <div class="certificate-image-container">
+                <img
+                  src="assets/images/Google-Certificate4.jpg"
+                  alt="Google Use AI Responsibly Certificate"
+                />
+              </div>
+              <div class="certificate-body">
+                <h3 class="certificate-title">Use AI Responsibly</h3>
+                <div class="certificate-issuer">
+                  <i class="ri-google-fill"></i>
+                  <span>Google via Coursera</span>
+                </div>
+                <div class="certificate-meta">
+                  <span><i class="ri-calendar-line"></i> 2026</span>
+                  <span><i class="ri-verified-badge-line"></i> Verified</span>
+                </div>
+                <a
+                  href="https://www.coursera.org/account/accomplishments/verify/XF1NP9NABINC"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="certificate-link"
