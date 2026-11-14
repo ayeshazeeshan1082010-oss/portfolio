@@ -27,8 +27,29 @@
         /* Width ko 190px kiya hai taake 5 cards ek row mein fit ho jayein */
         grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
         gap: 1rem;
-        margin-top: 2rem;
+        margin-top: 1.5rem;
         align-items: stretch;
+      }
+
+      .certificate-category-title {
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--primary-color, #007bff);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .certificate-category-title::before,
+      .certificate-category-title::after {
+        content: "";
+        height: 1px;
+        width: 30px;
+        background: var(--primary-color, #007bff);
+        opacity: 0.5;
       }
 
       .certificate-card {
@@ -865,6 +886,11 @@
             </p>
           </div>
 
+          <!-- Category Title -->
+          <div class="certificate-category-title reveal">
+            <i class="ri-google-fill"></i> Google AI Essentials
+          </div>
+
           <div class="certificates-grid">
             <!-- Certificate 1: Introduction to AI -->
             <div class="glass-card certificate-card reveal">
@@ -982,7 +1008,7 @@
               </div>
             </div>
 
-            <!-- Certificate 5: Stay Ahead of the AI Curve (NEW) -->
+            <!-- Certificate 5: Stay Ahead of the AI Curve -->
             <div class="glass-card certificate-card reveal">
               <div class="certificate-image-container">
                 <img
